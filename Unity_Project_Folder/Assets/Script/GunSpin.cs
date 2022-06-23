@@ -8,8 +8,7 @@ public class GunSpin : MonoBehaviour
     Transform target;
     [SerializeField]
 	float speed = 1000.0f;
-
-    bool flag = true;
+	float step;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +18,7 @@ public class GunSpin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && flag)
-        {
-            OneRotation();
-            flag = false;
-        }
+        a();
     }
 
 /*
@@ -36,26 +31,10 @@ public class GunSpin : MonoBehaviour
         transform.Rotate(0,0,speed * Time.deltaTime);
     }
 
-/*
-
-    1回だけ回転させる
-
-*/
-    private void OneRotation()
+    private void a()
     {
-        transform.DOLocalRotate(new Vector3(0, 0, 360f), 1f,
-                RotateMode.FastBeyond360).OnComplete(RotateComplete);
-    }
-
-/*
-
-    DOTweenのOnCompleteの時に呼び出される
-
-*/
-    private void RotateComplete()
-    {
-        Debug.Log("銃1回転：終了");
-        transform.eulerAngles = new Vector3(0.0f,0.0f,0.0f);
-        flag = true;
+        transform.DOLocalRotate(new Vector3(0, 0, 360f), speed * Time.deltaTime, RotateMode.FastBeyond360)
+    .SetEase(Ease.Linear)
+    .SetLoops(-1, LoopType.Restart);
     }
 }
