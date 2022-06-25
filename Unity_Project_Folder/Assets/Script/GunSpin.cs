@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class GunSpin : MonoBehaviour
 {
-    Transform target;
     [SerializeField]
 	float speed = 1000.0f;
-	float step;
+
+    private bool flag = true;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,11 @@ public class GunSpin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        a();
+        if (Input.GetMouseButton(0))
+        {
+            OneRotate();
+            flag = false;
+        }
     }
 
 /*
@@ -31,10 +35,20 @@ public class GunSpin : MonoBehaviour
         transform.Rotate(0,0,speed * Time.deltaTime);
     }
 
-    private void a()
+    private void OneRotate()
     {
-        transform.DOLocalRotate(new Vector3(0, 0, 360f), speed * Time.deltaTime, RotateMode.FastBeyond360)
-    .SetEase(Ease.Linear)
-    .SetLoops(-1, LoopType.Restart);
+        transform.DOLocalRotate(new Vector3(0, 0, 360f), 1f,
+                                RotateMode.FastBeyond360).OnComplete(OneRotateComplete);
+    }
+
+    private void OneRotateComplete()
+    {
+        Debug.Log("COMPLETED");
+
+        Vector3 eulerAngles = transform.eulerAngles;
+        eulerAngles.z = 0.0f;
+        transform.eulerAngles = eulerAngles;
+
+        flag = true;
     }
 }
