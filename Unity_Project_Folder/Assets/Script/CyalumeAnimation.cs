@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class CyalumeAnimation : MonoBehaviour
 {
-    private float ShakeMax = 60.0f;
-    private float ShakeMin = 30.0f;
+    private float ShakeMax = 80.0f;
+    private float ShakeMin = 10.0f;
     private float Speed = 1.5f;
 
     // Start is called before the first frame update
