@@ -11,22 +11,24 @@ public class CyalumeLighting : MonoBehaviour
     private int ColorNo = 0;
 
     [SerializeField]
-    private bool RandomFlag = false;
-
-    [SerializeField]
     private Material[] CyalumeMaterial;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(RandomFlag == true)
-        {
-            ColorNo = Random.Range(0, CyalumeMaterial.Length);
-        }
-
         Debug.Log ("サイリウム　カラー番号：" + ColorNo);
 
         // サイリウム部分 マテリアル変更
         CyalumeCylinder.GetComponent<MeshRenderer>().material = CyalumeMaterial[ColorNo];
+    }
+
+/*
+
+    サイリウム色変更
+
+*/
+    public void ChangeCyalumeColor(int index)
+    {
+        CyalumeCylinder.GetComponent<MeshRenderer>().material = CyalumeMaterial[index];
     }
 }
