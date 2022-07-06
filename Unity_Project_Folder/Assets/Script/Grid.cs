@@ -11,8 +11,8 @@ public class Grid : MonoBehaviour {
    };
 
   public float gridSize=1f;
-   public int size=8;
-   public Color color = Color.white;
+   public int size=50;
+   public Color color = Color.black;
    public Face face = Face.zx;
    public bool back = true;
 
